@@ -1,9 +1,14 @@
-﻿using NUnit.Framework;
+﻿using GitHubCopilotTesting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace GitHubCopilotTesting;
+namespace GitHubCopilotTestingTests;
 
 [TestFixture]
-public class QuickSortTests
+public class InsertionSortTests
 {
     [Test]
     public void Sort_ShouldSortArrayInAscendingOrder()
@@ -13,7 +18,7 @@ public class QuickSortTests
         int[] expected = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
         // Act
-        QuickSort.Sort(array);
+        InsertionSort.Sort(array);
 
         // Assert
         Assert.That(array, Is.EqualTo(expected));
@@ -27,7 +32,7 @@ public class QuickSortTests
         int[] expected = [1, 2, 3, 4, 5, 5, 6, 7, 8, 8, 8, 9, 13, 13];
 
         // Act
-        QuickSort.Sort(array);
+        InsertionSort.Sort(array);
 
         // Assert
         Assert.That(array, Is.EqualTo(expected));
@@ -41,7 +46,7 @@ public class QuickSortTests
         int[] expected = [-8, -6, -5, -4, -1, 2, 3, 7, 9];
 
         // Act
-        QuickSort.Sort(array);
+        InsertionSort.Sort(array);
 
         // Assert
         Assert.That(array, Is.EqualTo(expected));
@@ -55,7 +60,7 @@ public class QuickSortTests
         int[] expected = [];
 
         // Act
-        QuickSort.Sort(array);
+        InsertionSort.Sort(array);
 
         // Assert
         Assert.That(array, Is.EqualTo(expected));
@@ -65,11 +70,39 @@ public class QuickSortTests
     public void Sort_ShouldSortArrayWithHugeNumbers()
     {
         // Arrange
-        int[] array = [100_000_000, 1_000_000_000, 10_000_000, 1_000_000];
-        int[] expected = [1_000_000, 10_000_000, 100_000_000, 1_000_000_000];
+        int[] array = [int.MaxValue, int.MinValue, int.MaxValue - 1, int.MinValue + 1];
+        int[] expected = [int.MinValue, int.MinValue + 1, int.MaxValue - 1, int.MaxValue];
 
         // Act
-        QuickSort.Sort(array);
+        InsertionSort.Sort(array);
+
+        // Assert
+        Assert.That(array, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void Sort_ShouldSortArrayWithOneElement()
+    {
+        // Arrange
+        int[] array = [5];
+        int[] expected = [5];
+
+        // Act
+        InsertionSort.Sort(array);
+
+        // Assert
+        Assert.That(array, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void Sort_ShouldSortArrayWithTwoElements()
+    {
+        // Arrange
+        int[] array = [5, 2];
+        int[] expected = [2, 5];
+
+        // Act
+        InsertionSort.Sort(array);
 
         // Assert
         Assert.That(array, Is.EqualTo(expected));
@@ -92,20 +125,6 @@ public class QuickSortTests
         {
             expected[i] = i + 1;
         }
-
-        // Act
-        QuickSort.Sort(array);
-
-        // Assert
-        Assert.That(array, Is.EqualTo(expected));
-    }
-
-    [Test]
-    public void Sort_ShouldSortArrayWithOneElement()
-    {
-        // Arrange
-        int[] array = [42];
-        int[] expected = [42];
 
         // Act
         QuickSort.Sort(array);

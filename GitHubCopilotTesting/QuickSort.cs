@@ -24,11 +24,15 @@ public class QuickSort
 
     private static int Partition(int[] array, int low, int high)
     {
+        // Select the pivot element as the last element of the array
         int pivot = array[high];
         int i = low - 1;
 
+        // Iterate through the array from low to high-1
         for (int j = low; j < high; j++)
         {
+            // If the current element is smaller than the pivot,
+            // swap it with the element at index i+1 and increment i
             if (array[j] < pivot)
             {
                 i++;
@@ -36,15 +40,15 @@ public class QuickSort
             }
         }
 
+        // Swap the pivot element with the element at index i+1
         Swap(array, i + 1, high);
         return i + 1;
     }
 
     private static void Swap(int[] array, int a, int b)
     {
-        int temp = array[a];
-        array[a] = array[b];
-        array[b] = temp;
+        // Swap the elements at indices a and b in the array
+        (array[b], array[a]) = (array[a], array[b]);
     }
 }
 
